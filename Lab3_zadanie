@@ -1,8 +1,8 @@
 -- создаём битый заказ
 SET session_replication_role = replica;
 
-INSERT INTO orders (order_number, client_code, order_date, delivery_address)
-VALUES (999, 999, '2023-10-15', 'г. Неизвестный');
+INSERT INTO orders (order_number, client_code, order_date, assembly_deadline, additional_info, delivery_address)
+VALUES (999, 999, '2023-10-15', '2023-10-18', 'груз', 'г. Неизвестный, ул. Потерянная, д. 0');
 
 -- запрос с левосторонним соединением 
 SELECT 
