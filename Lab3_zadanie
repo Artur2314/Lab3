@@ -1,0 +1,36 @@
+-- создаём битый заказ
+SET session_replication_role = replica;
+
+INSERT INTO orders (order_number, client_code, order_date, delivery_address)
+VALUES (999, 999, '2023-10-15', 'г. Неизвестный');
+
+-- запрос с левосторонним соединением 
+SELECT 
+    c.client_code, 
+    c.last_name, 
+    c.first_name, 
+    o.order_number, 
+    o.order_date, 
+    o.delivery_address
+FROM client c
+LEFT JOIN orders o ON c.client_code = o.client_code
+ORDER BY c.client_code;
+
+-- запрос с правосторонним соединением
+SELECT 
+    c.client_code, 
+    c.last_name, 
+    c.first_name, 
+    o.order_number, 
+    o.client_code AS order_client_code, 
+    o.order_date, 
+    o.delivery_address
+FROM client c
+RIGHT JOIN orders o ON c.client_code = o.client_code
+ORDER BY o.order_number;
+
+--восстановление целостности 
+
+DELETE FROM orders WHERE order_number = 999;
+
+SET session_replication_role = DEFAULT;
