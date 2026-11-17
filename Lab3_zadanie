@@ -1,4 +1,4 @@
--- создаём битый заказ
+-- создаём сломаный заказ
 SET session_replication_role = replica;
 
 INSERT INTO orders (order_number, client_code, order_date, assembly_deadline, additional_info, delivery_address)
